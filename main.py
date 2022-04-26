@@ -16,6 +16,14 @@ print("Model Loaded")
 def home():
 	return render_template("index.html")
 
+
+@app.route("/api_predict",methods=['POST'])
+@cross_origin()
+def api_predict():
+	List = request.json['list']
+	pred = model.predict(List)
+	return jsonify({'output':str(pred)})
+
 @app.route("/predict",methods=['GET', 'POST'])
 @cross_origin()
 def predict():
